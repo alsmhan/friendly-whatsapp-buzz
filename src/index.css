@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,23 +33,20 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --whatsapp-light: 142 70% 55%;
+    --whatsapp: 142 70% 45%;
+    --whatsapp-dark: 142 70% 35%;
   }
 
   .dark {
@@ -79,6 +77,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -87,6 +86,10 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --whatsapp-light: 142 50% 55%;
+    --whatsapp: 142 50% 45%;
+    --whatsapp-dark: 142 50% 35%;
   }
 }
 
@@ -97,5 +100,62 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/80 dark:bg-black/80 backdrop-blur-md border border-white/20 dark:border-black/20 shadow-lg;
+  }
+
+  .chat-bg {
+    background-color: #f0f2f5;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544v2.83L25.414 28l-1.414 1.414L0 5.373v2.83L22.272 28l-1.414 1.414L0 8.2v2.83L19.13 28l-1.414 1.414L0 11.03v2.828l14.544 14.544L13.13 29.8 0 16.686v2.83l10.258 10.257L8.844 31.18 0 22.344v2.83L5.58 31.18 4.165 32.6 0 28.442v2.83L1.44 32.6 0 34.04v5.96h60V0H.284z' fill='%23e5e7eb' fill-opacity='.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+
+  .floating-input {
+    @apply relative bg-white/80 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-full shadow-sm transition-all duration-300 focus-within:shadow-md overflow-hidden;
+  }
+  
+  .message-bubble {
+    @apply relative px-4 py-2 rounded-2xl max-w-[85%] shadow-sm;
+    @apply animate-fade-in;
+  }
+  
+  .message-outgoing {
+    @apply bg-whatsapp/10 text-foreground;
+  }
+  
+  .message-incoming {
+    @apply bg-white dark:bg-gray-800 text-foreground;
+  }
+  
+  .chat-item {
+    @apply border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-all duration-200;
+  }
+  
+  .fade-in {
+    @apply opacity-0 animate-fade-in;
   }
 }
